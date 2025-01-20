@@ -87,11 +87,15 @@ const Lecture = () => {
   };
 
   const deleteHandler = async (id) => {
-    if (confirm("Are you sure you want to delete this lecture?")) {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm("Are you sure you want to delete this lecture")) {
       try {
         const { data } = await axios.delete(`${server}/api/lecture/${id}`, {
-          headers: { token: localStorage.getItem("token") },
+          headers: {
+            token: localStorage.getItem("token"),
+          },
         });
+
         toast.success(data.message);
         fetchLectures();
       } catch (error) {
@@ -99,6 +103,7 @@ const Lecture = () => {
       }
     }
   };
+
 
   useEffect(() => {
     fetchLectures();
